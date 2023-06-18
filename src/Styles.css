@@ -7,7 +7,7 @@
   --grisClaro: #2e2e2e;
   --blanco: #ffffff;
   --claro: #e3f6f5;
-  --menosClaro: #bae8e8;
+  --react: #00D8FF;
 }
 
 /* Globales */
@@ -83,7 +83,7 @@ label {
 
 /* Hay que agregar el degradado al heading. */
 .header__heading {
-  color: var(--menosClaro);
+  color: var(--react);
   margin: 1rem 0;
 }
 
@@ -115,12 +115,12 @@ label {
   display: block;
   text-align: center;
   padding: 1rem 3rem;
-  color: var(--menosClaro);
+  color: var(--react);
   font-size: 2rem;
 }
 
 .navegacion__enlace:hover {
-  background-color: var(--menosClaro);
+  background-color: var(--react);
   border-radius: 0.6rem;
   color: var(--oscuro);
   transition: 0.3s;
@@ -147,7 +147,7 @@ label {
 }
 
 .main__tecnologias {
-  color: var(--menosClaro);
+  color: var(--react);
 }
 .main__display {
   display: flex;
@@ -186,7 +186,7 @@ label {
   max-width: 100rem;
   margin: 0 auto;
   padding: 2rem;
-  background-color: var(--menosClaro);
+  background-color: var(--react);
   border-radius: 1rem;
   -webkit-box-shadow: 0px 0px 10px -3px rgba(25, 25, 25, 1);
   -moz-box-shadow: 0px 0px 10px -3px rgba(25, 25, 25, 1);
@@ -263,7 +263,7 @@ label {
 }
 
 .tablaClientes__heading {
-  color: var(--menosClaro);
+  color: var(--react);
   margin-top: 0;
 }
 
@@ -275,7 +275,7 @@ label {
 }
 
 .tabla__fila {
-  border: 1px solid var(--menosClaro);
+  border: 1px solid var(--react);
 }
 
 .tabla__columna {
@@ -318,7 +318,7 @@ label {
 /* FOOTER */
 
 .footer {
-  background-color: var(--menosClaro);
+  background-color: var(--react);
   padding: 3rem;
 }
 

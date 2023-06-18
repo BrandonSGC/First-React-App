@@ -1,4 +1,3 @@
-import "./Tecnologias";
 import React from "react";
 import reactLogo from "../img/react.png";
 import gitLogo from "../img/git.png";
