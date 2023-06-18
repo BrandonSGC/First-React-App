@@ -12,6 +12,7 @@ const { obtenerClientesSQLServer } = require('./databaseSQLServer.js');
 
 // Funciones de Insertar/Obtener datos de MySQL.
 const { insertarClienteMySQL } = require('./databaseMySQL.js');
+const {obtenerClientesMySQL} = require('./databaseMySQL.js');
 
 
 
@@ -26,17 +27,17 @@ app.listen(PUERTO, () => {
 });
 
 // Configurar la entrega de archivos estáticos.
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/html/index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
 // Insertar datos del cliente
-app.post('/crearCliente', async (req, res) => {
+app.post('/actualizarCliente', async (req, res) => {
     try {
         // Accedemos a los datos enviados del formulario.
         const cedula = req.body.cedula
@@ -66,12 +67,9 @@ app.post('/crearCliente', async (req, res) => {
 
 app.get('/obtenerClientes', async (req, res) => {  
     try {
-        // Obtenemos los datos de los Clientes.
-        const clientes = await obtenerClientesSQLServer();
-
-
-        
-        
+        // Obtenemos los datos de los Clientes de MySQL.
+        const clientes = await obtenerClientesMySQL();
+            
         // Enviamos el array de objetos en JSON.
         res.json(clientes);
     } catch (error) {

@@ -1,89 +1,114 @@
+import "../Formulario.js";
+import React, { useEffect, useState } from "react";
+
 export function Formulario() {
+  // Para crear un estado clientes que almacenará los datos obtenidos de la API
+  const [clientes, setClientes] = useState([]);
+
+  useEffect(() => {
+    obtenerClientes();
+
+    async function obtenerClientes() {
+      const response = await fetch("/obtenerClientes");
+      const data = await response.json();
+      setClientes(data);
+    }
+  }, []);
   return (
     <form
-      action="/crearCliente"
+      action="/actualizarCliente"
       method="post"
       id="formularioClientes"
-      className="crearCliente__formulario"
+      className="actualizarCliente__formulario"
     >
-        <fieldset>
-              <label for="cedula">Cedula:</label>
-              <input
-                className="crearCliente__input"
-                type="number"
-                name="cedula"
-                id="cedula"
-              />
+      <fieldset>
+        <label htmlFor="cedula">Cedula:</label>
+        <select className="actualizarCliente__input" name="cedula" id="cedula">
+          {clientes.map((cliente) => (
+            <option key={cliente.cedula} value={cliente.cedula}>
+              {cliente.cedula}
+            </option>
+          ))}
+        </select>
 
-              <label for="nombre">Nombre:</label>
-              <input
-                className="crearCliente__input"
-                type="text"
-                name="nombre"
-                id="nombre"
-              />
+        <label htmlFor="nombre">Nombre:</label>
+        <input
+          className="actualizarCliente__input"
+          type="text"
+          name="nombre"
+          id="nombre"
+          readOnly
+        />
 
-              <label for="primerApellido">Primer Apellido:</label>
-              <input
-                className="crearCliente__input"
-                type="text"
-                name="primerApellido"
-                id="primerApellido"
-              />
+        <label htmlFor="primerApellido">Primer Apellido:</label>
+        <input
+          className="actualizarCliente__input"
+          type="text"
+          name="primerApellido"
+          id="primerApellido"
+          readOnly
+        />
 
-              <label for="segundoApellido">Segundo Apellido:</label>
-              <input
-                className="crearCliente__input"
-                type="text"
-                name="segundoApellido"
-                id="segundoApellido"
-              />
+        <label htmlFor="segundoApellido">Segundo Apellido:</label>
+        <input
+          className="actualizarCliente__input"
+          type="text"
+          name="segundoApellido"
+          id="segundoApellido"
+          readOnly
+        />
 
-              <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-              <input
-                className="crearCliente__input"
-                type="date"
-                name="fechaNacimiento"
-                id="fechaNacimiento"
-              />
-            </fieldset>
+        <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input
+          className="actualizarCliente__input"
+          type="date"
+          name="fechaNacimiento"
+          id="fechaNacimiento"
+          readOnly
+        />
+      </fieldset>
 
-            <fieldset>
-              <label for="telefono">Teléfono:</label>
-              <input
-                className="crearCliente__input"
-                type="number"
-                name="telefono"
-                id="telefono"
-              />
+      <fieldset>
+        <label htmlFor="telefono">Teléfono:</label>
+        <input
+          className="actualizarCliente__input"
+          type="number"
+          name="telefono"
+          id="telefono"
+          readOnly
+        />
 
-              <label for="email">Email:</label>
-              <input
-                className="crearCliente__input"
-                type="email"
-                name="email"
-                id="email"
-              />
+        <label htmlFor="email">Email:</label>
+        <input
+          className="actualizarCliente__input"
+          type="email"
+          name="email"
+          id="email"
+          readOnly
+        />
 
-              <label for="sexo">Sexo:</label>
-              <select className="crearCliente__input" name="sexo" id="sexo">
-                <option value="">-- Seleccionar Sexo --</option>
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
-              </select>
+        <label htmlFor="sexo">Sexo:</label>
+        <select className="actualizarCliente__input" name="sexo" id="sexo">
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
 
-              <label for="estado" className="">Estado:</label>
-              <select className="crearCliente__input" name="estado" id="estado">
-                <option value="0">Inactivo</option>
-              </select>
-              <button
-                id="btnCrearCliente"
-                className="crearCliente__boton"
-                type="submit"
-              >
-                Actualizar Cliente
-              </button>
-            </fieldset>
+        <label htmlFor="estado" className="">
+          Estado:
+        </label>
+        <select className="actualizarCliente__input" name="estado" id="estado">
+          <option value="0">Inactivo</option>
+          <option value="1">Activo</option>
+        </select>
+        <button
+          id="btnActualizarCliente"
+          className="actualizarCliente__boton"
+          type="submit"
+        >
+          Actualizar Cliente
+        </button>
+      </fieldset>
+      <script src="../Formulario.js"></script>
     </form>
   );
 }

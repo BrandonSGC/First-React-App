@@ -41,7 +41,19 @@ async function insertarClienteMySQL(cedula, nombre, primerApellido, segundoApell
 }
 
 
+async function obtenerClientesMySQL() {
+    return new Promise((resolve, reject) => {
+      connection.query('SELECT * FROM Cliente', (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
+
 module.exports = {
     insertarClienteMySQL,
-    conectar,
+    obtenerClientesMySQL,
 }

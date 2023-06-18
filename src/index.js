@@ -15,13 +15,13 @@ root.render(
   <>
     <Header logo="ReactJS" enlace1="Inicio" enlace2="Crear Cliente" enlace3="Ver Clientes"/>
     <Main clientName="Cliente #2 - React"/>
-    <section className="crearCliente">
+    <section className="actualizarCliente">
       
-      <div className="crearCliente__contenedor">
-          <div className="crearCliente__display">
-            <h3 className="crearCliente__heading">Actualizar Cliente</h3>
+      <div className="actualizarCliente__contenedor">
+          <div className="actualizarCliente__display">
+            <h3 className="actualizarCliente__heading">Actualizar Cliente</h3>
             <Formulario/>
-          </div>          
+          </div>
       </div>
     </section>
     <section className="tablaClientes">
