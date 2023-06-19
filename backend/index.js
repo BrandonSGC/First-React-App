@@ -7,13 +7,10 @@ const app = express();
 const PUERTO = 3500;
 
 // Funciones de Insertar/Obtener datos de SQL Server.
-const { insertarClienteSQLServer } = require('./databaseSQLServer.js');
-const { obtenerClientesSQLServer } = require('./databaseSQLServer.js');
+const { insertarClienteSQLServer, obtenerClientesSQLServer } = require('./databaseSQLServer.js');
 
 // Funciones de Insertar/Obtener datos de MySQL.
-const { insertarClienteMySQL } = require('./databaseMySQL.js');
-const {obtenerClientesMySQL} = require('./databaseMySQL.js');
-
+const { actualizarClienteMySQL, obtenerClientesMySQL } = require('./databaseMySQL.js');
 
 
 const bodyParser = require('body-parser');
@@ -36,32 +33,24 @@ app.get('/', (req, res) => {
 });
 
 
-// Insertar datos del cliente
+// Actualizar datos del cliente
 app.post('/actualizarCliente', async (req, res) => {
     try {
         // Accedemos a los datos enviados del formulario.
         const cedula = req.body.cedula
-        const nombre = req.body.nombre
-        const primerApellido = req.body.primerApellido
-        const segundoApellido = req.body.segundoApellido        
-        const fechaString = req.body.fechaNacimiento;
-        const [year, month, day] = fechaString.split("-")
-        const fecha = new Date(year, month - 1, day);
-        const telefono = req.body.telefono;    
-        const email = req.body.email;
-        const sexo = req.body.sexo;
         const estado = req.body.estado === "0" ? false : true;
 
-        // Insertar datos en SQL Server.
-        await insertarClienteSQLServer(cedula, nombre, primerApellido, segundoApellido, fecha, telefono, email, sexo, estado);        
-        // Insertar datos en MySQL.
-        await insertarClienteMySQL(cedula, nombre, primerApellido, segundoApellido, fecha, telefono, email, sexo, estado);
+        // Actualizar datos en MySQL.
+        await actualizarClienteMySQL(cedula, estado);
+
+        // Actualizar datos en SQL Server.
         
-        res.send(`Datos guardados exitósamente.`);
+        
+        res.send(`Datos actualizados exitósamente.`);
         
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error al guardar los datos.');
+        res.status(500).send('Error al actualizar los datos.');
     }
 });
 

@@ -7,7 +7,6 @@ export function Formulario() {
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
   const [cedulaSeleccionada, setCedulaSeleccionada] = useState("");
 
-
   useEffect(() => {
     obtenerClientes();
 
@@ -23,15 +22,12 @@ export function Formulario() {
 
   const handleCedulaChange = (event) => {
     const cedulaSeleccionada = event.target.value;
-    console.log(event.target.value);
-    console.log(cedulaSeleccionada);
-    console.log(clientes);
-    
     // Arreglar error. Seguro por el tipo de dato...
-    const cliente = clientes.find((cliente) => cliente.cedula === parseInt(cedulaSeleccionada));
+    const cliente = clientes.find(
+      (cliente) => cliente.cedula === parseInt(cedulaSeleccionada)
+    );
     setCedulaSeleccionada(cedulaSeleccionada);
-    setClienteSeleccionado(cliente);
-    console.log(cliente);
+    setClienteSeleccionado(cliente);    
   };
 
   return (
@@ -62,20 +58,20 @@ export function Formulario() {
           className="actualizarCliente__input"
           type="text"
           name="nombre"
-          id="nombre"          
-          value={clienteSeleccionado ? clienteSeleccionado.nombre : ''}
+          id="nombre"
+          value={clienteSeleccionado ? clienteSeleccionado.nombre : ""}
           readOnly
-          />
+        />
 
         <label htmlFor="primerApellido">Primer Apellido:</label>
         <input
           className="actualizarCliente__input"
           type="text"
           name="primerApellido"
-          id="primerApellido"          
-          value={clienteSeleccionado ? clienteSeleccionado.primerApellido : ''}
+          id="primerApellido"
+          value={clienteSeleccionado ? clienteSeleccionado.primerApellido : ""}
           readOnly
-          />
+        />
 
         <label htmlFor="segundoApellido">Segundo Apellido:</label>
         <input
@@ -84,8 +80,8 @@ export function Formulario() {
           name="segundoApellido"
           id="segundoApellido"
           readOnly
-          value={clienteSeleccionado ? clienteSeleccionado.segundoApellido : ''}
-          />
+          value={clienteSeleccionado ? clienteSeleccionado.segundoApellido : ""}
+        />
 
         <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
         <input
@@ -105,8 +101,8 @@ export function Formulario() {
           name="telefono"
           id="telefono"
           readOnly
-          value={clienteSeleccionado ? clienteSeleccionado.telefono : ''}
-          />
+          value={clienteSeleccionado ? clienteSeleccionado.telefono : ""}
+        />
 
         <label htmlFor="email">Email:</label>
         <input
@@ -115,8 +111,8 @@ export function Formulario() {
           name="email"
           id="email"
           readOnly
-          value={clienteSeleccionado ? clienteSeleccionado.email : ''}
-          />
+          value={clienteSeleccionado ? clienteSeleccionado.email : ""}
+        />
 
         <label htmlFor="sexo">Sexo:</label>
         <select className="actualizarCliente__input" name="sexo" id="sexo">
@@ -139,7 +135,6 @@ export function Formulario() {
           Actualizar Cliente
         </button>
       </fieldset>
-      {/* <script src="../Formulario.js"></script> */}
     </form>
   );
 }
