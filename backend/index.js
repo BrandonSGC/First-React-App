@@ -7,7 +7,7 @@ const app = express();
 const PUERTO = 3500;
 
 // Funciones de Insertar/Obtener datos de SQL Server.
-const { insertarClienteSQLServer, obtenerClientesSQLServer } = require('./databaseSQLServer.js');
+const { actualizarClienteSQLServer } = require('./databaseSQLServer.js');
 
 // Funciones de Insertar/Obtener datos de MySQL.
 const { actualizarClienteMySQL, obtenerClientesMySQL } = require('./databaseMySQL.js');
@@ -44,7 +44,7 @@ app.post('/actualizarCliente', async (req, res) => {
         await actualizarClienteMySQL(cedula, estado);
 
         // Actualizar datos en SQL Server.
-        
+        await actualizarClienteSQLServer(cedula, estado);
         
         res.send(`Datos actualizados exitósamente.`);
         
