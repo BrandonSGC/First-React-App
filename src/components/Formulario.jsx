@@ -1,9 +1,12 @@
-import "../Formulario.js";
+//import "../Formulario.js";
 import React, { useEffect, useState } from "react";
 
 export function Formulario() {
   // Para crear un estado clientes que almacenará los datos obtenidos de la API
   const [clientes, setClientes] = useState([]);
+  const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
+  const [cedulaSeleccionada, setCedulaSeleccionada] = useState("");
+
 
   useEffect(() => {
     obtenerClientes();
@@ -12,8 +15,25 @@ export function Formulario() {
       const response = await fetch("/obtenerClientes");
       const data = await response.json();
       setClientes(data);
+      if (data.length > 0) {
+        setClienteSeleccionado(data[0]);
+      }
     }
   }, []);
+
+  const handleCedulaChange = (event) => {
+    const cedulaSeleccionada = event.target.value;
+    console.log(event.target.value);
+    console.log(cedulaSeleccionada);
+    console.log(clientes);
+    
+    // Arreglar error. Seguro por el tipo de dato...
+    const cliente = clientes.find((cliente) => cliente.cedula === parseInt(cedulaSeleccionada));
+    setCedulaSeleccionada(cedulaSeleccionada);
+    setClienteSeleccionado(cliente);
+    console.log(cliente);
+  };
+
   return (
     <form
       action="/actualizarCliente"
@@ -23,7 +43,13 @@ export function Formulario() {
     >
       <fieldset>
         <label htmlFor="cedula">Cedula:</label>
-        <select className="actualizarCliente__input" name="cedula" id="cedula">
+        <select
+          className="actualizarCliente__input"
+          name="cedula"
+          id="cedula"
+          value={cedulaSeleccionada}
+          onChange={handleCedulaChange}
+        >
           {clientes.map((cliente) => (
             <option key={cliente.cedula} value={cliente.cedula}>
               {cliente.cedula}
@@ -36,18 +62,20 @@ export function Formulario() {
           className="actualizarCliente__input"
           type="text"
           name="nombre"
-          id="nombre"
+          id="nombre"          
+          value={clienteSeleccionado ? clienteSeleccionado.nombre : ''}
           readOnly
-        />
+          />
 
         <label htmlFor="primerApellido">Primer Apellido:</label>
         <input
           className="actualizarCliente__input"
           type="text"
           name="primerApellido"
-          id="primerApellido"
+          id="primerApellido"          
+          value={clienteSeleccionado ? clienteSeleccionado.primerApellido : ''}
           readOnly
-        />
+          />
 
         <label htmlFor="segundoApellido">Segundo Apellido:</label>
         <input
@@ -56,7 +84,8 @@ export function Formulario() {
           name="segundoApellido"
           id="segundoApellido"
           readOnly
-        />
+          value={clienteSeleccionado ? clienteSeleccionado.segundoApellido : ''}
+          />
 
         <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
         <input
@@ -76,7 +105,8 @@ export function Formulario() {
           name="telefono"
           id="telefono"
           readOnly
-        />
+          value={clienteSeleccionado ? clienteSeleccionado.telefono : ''}
+          />
 
         <label htmlFor="email">Email:</label>
         <input
@@ -85,7 +115,8 @@ export function Formulario() {
           name="email"
           id="email"
           readOnly
-        />
+          value={clienteSeleccionado ? clienteSeleccionado.email : ''}
+          />
 
         <label htmlFor="sexo">Sexo:</label>
         <select className="actualizarCliente__input" name="sexo" id="sexo">
@@ -108,7 +139,7 @@ export function Formulario() {
           Actualizar Cliente
         </button>
       </fieldset>
-      <script src="../Formulario.js"></script>
+      {/* <script src="../Formulario.js"></script> */}
     </form>
   );
 }
