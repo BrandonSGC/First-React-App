@@ -1,7 +1,6 @@
-// Este archivo vamos a tener la configuración de la base de datos
-// MySQL y la lógica relacionada.
 const mysql = require("mysql");
 
+// Connection.
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -9,19 +8,18 @@ const connection = mysql.createConnection({
   database: "webservices",
 });
 
-// Conectar a la base de datos MySQL e usamos la misma conexion para los metodos.
+// Hacemos la conexion para utilizarla en las funciones.
 connection.connect((error) => {
   if (error) {
     console.error("Error al conectar a la base de datos:", error);
   }
 });
 
+// Funcion para actualizar los clientes.
 async function actualizarClienteMySQL(cedula, estado) {
   try {
-
-    // Se especifica la consulta SQL con marcadores de posición "?" para los valores.
+    // Hacemos la consulta, los ? los pasamos como values en el mismo orden.
     const query = "UPDATE Cliente SET estado = ? WHERE cedula = ?";
-    // Se proporciona un arreglo values con los valores correspondientes en el mismo orden.
     const values = [estado, cedula];
 
     connection.query(query, values, (error, results) => {
@@ -36,18 +34,20 @@ async function actualizarClienteMySQL(cedula, estado) {
   }
 }
 
+// Funcion para obtener los clientes.
 async function obtenerClientesMySQL() {
   return new Promise((resolve, reject) => {
     connection.query("SELECT * FROM Cliente", (error, results) => {
       if (error) {
         reject(error);
-      } else {        
+      } else {
         resolve(results);
       }
     });
   });
 }
 
+// Exportamos las funciones.
 module.exports = {
   actualizarClienteMySQL,
   obtenerClientesMySQL,

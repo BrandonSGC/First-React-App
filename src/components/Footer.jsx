@@ -2,7 +2,7 @@ import cucLogo from "../img/CUC.png";
 
 export function Footer() {
   return (
-    <footer>
+    <footer className="footer">
       <h3 className="footer__heading">
         Proyecto - Arquitectura de Sistemas Operativos
       </h3>

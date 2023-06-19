@@ -8,9 +8,10 @@ import { Footer } from "./components/Footer";
 import './Normalize.css';
 import './Styles.css';
 
-
+// Creamos el root.
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+// Agregamos al root los diferentes componentes.
 root.render(
   <>
     <Header logo="ReactJS" enlace1="Inicio" enlace2="Crear Cliente" enlace3="Ver Clientes"/>
@@ -22,14 +23,6 @@ root.render(
             <h3 className="actualizarCliente__heading">Actualizar Cliente</h3>
             <Formulario/>
           </div>
-      </div>
-    </section>
-    <section className="tablaClientes">
-      <div className="tablaClientes__contenedor">
-          <div className="tablaClientes__display">
-            <h1 className="tablaClientes__heading">Tabla Clientes</h1>
-            <Tabla/>
-          </div>          
       </div>
     </section>
     <Footer/>
