@@ -86,10 +86,11 @@ export function Formulario() {
         <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
         <input
           className="actualizarCliente__input"
-          type="date"
+          type="text"
           name="fechaNacimiento"
           id="fechaNacimiento"
           readOnly
+          value={clienteSeleccionado ? clienteSeleccionado.fechaNacimiento : ""}
         />
       </fieldset>
 
@@ -115,10 +116,14 @@ export function Formulario() {
         />
 
         <label htmlFor="sexo">Sexo:</label>
-        <select className="actualizarCliente__input" name="sexo" id="sexo">
-          <option value="M">Masculino</option>
-          <option value="F">Femenino</option>
-        </select>
+        <input
+          className="actualizarCliente__input"
+          type="text"
+          name="sexo"
+          id="sexo"
+          readOnly
+          value={clienteSeleccionado ? clienteSeleccionado.sexo : ""}          
+        />
 
         <label htmlFor="estado" className="">
           Estado:
